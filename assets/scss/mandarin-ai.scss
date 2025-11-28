@@ -1,7 +1,7 @@
 @import "_zero";
 @import "_font";
-$maxWidth: 1920;
-$maxWidthContenier: 1440;
+$maxWidth: 1445;
+$maxWidthContenier: 1125;
 
 @mixin adaptiv-value($property, $startSize, $minSize, $type) {
     $addSize: $startSize - $minSize;
@@ -29,7 +29,7 @@ $maxWidthContenier: 1440;
     }
 }
 [class*="_contenier"] {
-    max-width: 1440px;
+    max-width: 1125px;
     padding: 0 15px;
     margin: 0 auto;
 }
@@ -39,7 +39,74 @@ $maxWidthContenier: 1440;
     flex-direction: column;
     min-width: 100%;
     .header{
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 20;
 
+
+
+        .header__contenier{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 130px;
+            .header__logo{
+                display: flex;
+                align-items: center;
+                font-weight: bold;
+                font-family: 'Gilroy', sans-serif;
+                font-size: 24px;
+                .header__logo--img{
+                    max-width: 100%;
+                    
+
+                }
+                .header__logo--text{
+                    margin: 0 0 0 15px;
+                    color: #ff8c00;
+                    white-space: nowrap;
+                }
+            }
+            .menu{
+                .menu__list{
+                    display: flex;
+                    align-items: center;
+                    .menu__link{
+                        font-size: 20px;
+                        color: #3a2a1d;
+                        font-weight: 500;
+                        &:not(:last-child){
+                            @include adaptiv-value(margin-right, 24, 18, 0);
+                            
+                        }
+
+                    }
+                }
+            }
+            .header__btns{
+                display: flex;
+                align-items: center;
+                @include adaptiv-value("font-size", 20, 18, 0);
+                .header__btn{
+                    color: #ff8c00;
+                    
+                    font-weight: bold;
+                    &:not(:last-child){
+                        @include adaptiv-value(margin-right, 12, 6, 0);
+                    }
+                }
+                .orange{
+                    padding: 10px 28px;
+                    background-color: #ff8c00;
+                    border-radius: 30px;
+
+                    color: #fff;
+                    font-weight: bold;
+                }
+            }
+        }
     }
     .main{
         flex: 1 1 auto;
