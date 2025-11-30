@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 *, *::before, *::after {
   padding: 0;
@@ -204,66 +203,7 @@ body {
   background-color: #ffeadc;
   border-radius: 30px;
   height: 630px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  flex-direction: column;
   box-shadow: 0px 4px 10px 4px rgba(34, 60, 80, 0.2);
-  /* Скрываем настоящий input */
-}
-.wrapper .main .problem .problem__contenier .right .right_title {
-  flex: 1 1 auto;
-  font-size: 24px;
-  font-weight: bold;
-  position: relative;
-  top: 100px;
-  margin: 0 20px;
-}
-.wrapper .main .problem .problem__contenier .right .righ_btns {
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin: 0 auto;
-  top: -50px;
-}
-.wrapper .main .problem .problem__contenier .right .righ_btns .custom-file-label {
-  position: relative;
-  display: inline-block;
-  padding: 10px 22px;
-  border-radius: 20px;
-  background: #ff9600;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  user-select: none;
-}
-.wrapper .main .problem .problem__contenier .right .righ_btns .custom-file-label input[type=file] {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-.wrapper .main .problem .problem__contenier .right .righ_btns .label-text {
-  pointer-events: none;
-}
-.wrapper .main .problem .problem__contenier .right .righ_btns .file-name {
-  font-size: 14px;
-  color: #222;
-  max-width: 300px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.wrapper .main .problem .problem__contenier .right .righ_btns .submit-btn {
-  padding: 10px 22px;
-  border-radius: 20px;
-  background: #ff7d00;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin: 0 10px;
 }
 .wrapper .main .team {
   padding: 126px 0 140px 0;
@@ -375,64 +315,97 @@ body {
   max-width: 100%;
   object-fit: cover;
 }
-.wrapper .main .roadmap {
-  padding: 128px 0 140px 0;
-  background-color: #fff4eb;
+
+/* Swiper базовый размер/положение */
+.team-swiper {
+  width: 100%;
+  padding: 20px 0 40px 0;
+  box-sizing: border-box;
 }
-.wrapper .main .roadmap .roadmap__contenier .raodmap_titie {
-  font-weight: 500;
-  font-size: 48px;
-  text-align: center;
-  margin-bottom: 34px;
-}
-.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks {
+
+/* Связка: .swiper-slide и .top__blocks совместно */
+.team-swiper .swiper-slide {
+  width: 280px; /* базовая ширина слайда (можно менять) */
   display: flex;
-  justify-content: space-between;
-}
-.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block {
-  width: 336px;
-  padding: 47px 30px 46px 30px;
-  display: flex;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  margin: 0 auto;
-  background-color: #fafafa;
+  transition: transform 0.6s cubic-bezier(.2,.8,.2,1), opacity 0.6s;
+  will-change: transform, opacity;
+  pointer-events: auto;
+}
+
+/* Убираем позиционирование info, т.к. оно у вас задекларировано абсолютом — но лучше сохранить */
+.team-swiper .top__blocks {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   border-radius: 20px;
+  overflow: visible;
+  background: transparent;
 }
-.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block__title {
-  font-weight: 400;
-  font-size: 20px;
-  padding: 9px 24px;
-  border-radius: 60px;
-  background-color: rgba(255, 167, 44, 0.2039215686);
-  color: #8a5e00;
-  margin: 37px 0;
+
+/* Плавное увеличивание активного слайда (плюс немного подъёма) */
+.team-swiper .swiper-slide-active {
+  transform: translateY(-10px) scale(1.08);
+  z-index: 50;
 }
-.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .one {
-  background-color: rgba(100, 199, 93, 0.2274509804);
-  color: #64c75d;
+
+/* Немного уменьшенные соседние слайды */
+.team-swiper .swiper-slide-prev,
+.team-swiper .swiper-slide-next {
+  transform: translateY(0) scale(0.95);
+  z-index: 30;
+  opacity: 0.95;
 }
-.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .two {
-  background-color: rgba(255, 167, 44, 0.3843137255);
-  color: #8a5e00;
+
+/* Дальние слайды — тоньше */
+.team-swiper .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-prev):not(.swiper-slide-next) {
+  transform: scale(0.86);
+  opacity: 0.7;
+  z-index: 10;
 }
-.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block__subtitle {
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: 600;
+
+/* Переопределения для мобильных: тогда показываем 1 слайд */
+@media (max-width: 768px) {
+  .team-swiper .swiper-slide {
+    width: 80%;
+  }
+  .team-swiper .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.6;
+  }
 }
-.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block_texts .text {
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
+
+/* Стили кнопок/пагинации (по желанию) */
+.swiper-button-next, .swiper-button-prev {
+  color: #ff8c00;
+  width: 36px;
+  height: 36px;
+  top: 45%;
+  opacity: 0.9;
 }
-.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block_texts .text:not(:last-child) {
-  margin-bottom: 10px;
+.swiper-pagination-bullet {
+  background: rgba(0,0,0,0.15);
+  opacity: 0.9;
 }
-.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block_texts .text::marker {
-  position: relative;
-  left: -40px;
+.swiper-pagination-bullet-active {
+  background: #ff8c00;
 }
-.wrapper .footer {
-  margin-top: auto;
+
+.top_img {
+    z-index: 10;
 }
+
+.top__info {
+    z-index: 50 !important;
+}
+
+.top__links a {
+    position: relative;
+    z-index: 100;
+    pointer-events: auto !important;
+    cursor: pointer;
+}
+
+
+

@@ -1,569 +1,495 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Mandarin AI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-
-        *,
-        *::before,
-        *::after {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        img {
-            vertical-align: top;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-weight: inherit;
-            font-size: inherit;
-        }
-
-        html,
-        body {
-            height: 100%;
-            line-height: 1;
-        }
-
-        body {
-            font-family: "Montserrat", sans-serif;
-            font-weight: 400;
-            background-color: #fff;
-            color: #3a2a1d;
-        }
-
-        @font-face {
-            font-family: "Gilroy";
-            src: url("../fonts/Gilroy-Regular/Gilroy-Regular.eot");
-            src: url("../fonts/Gilroy-Regular/Gilroy-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Gilroy-Regular/Gilroy-Regular.woff2") format("woff2"), url("../fonts/Gilroy-Regular/Gilroy-Regular.woff") format("woff"), url("../fonts/Gilroy-Regular/Gilroy-Regular.ttf") format("truetype"), url("../fonts/Gilroy-Regular/Gilroy-Regular.svg#../fonts/Gilroy-Regular") format("svg");
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: "Gilroy";
-            src: url("../fonts/Gilroy-Bold/Gilroy-Bold.eot");
-            src: url("../fonts/Gilroy-Bold/Gilroy-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Gilroy-Bold/Gilroy-Bold.woff2") format("woff2"), url("../fonts/Gilroy-Bold/Gilroy-Bold.woff") format("woff"), url("../fonts/Gilroy-Bold/Gilroy-Bold.ttf") format("truetype"), url("../fonts/Gilroy-Bold/Gilroy-Bold.svg#../fonts/Gilroy-Bold") format("svg");
-            font-weight: bold;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: "Gilroy";
-            src: url("../fonts/Gilroy-Medium/Gilroy-Medium.eot");
-            src: url("../fonts/Gilroy-Medium/Gilroy-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/Gilroy-Medium/Gilroy-Medium.woff2") format("woff2"), url("../fonts/Gilroy-Medium/Gilroy-Medium.woff") format("woff"), url("../fonts/Gilroy-Medium/Gilroy-Medium.ttf") format("truetype"), url("../fonts/Gilroy-Medium/Gilroy-Medium.svg#../fonts/Gilroy-Medium") format("svg");
-            font-weight: 500;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: "Gilroy";
-            src: url("../fonts/Gilroy-Semibold/Gilroy-Semibold.eot");
-            src: url("../fonts/Gilroy-Semibold/Gilroy-Semibold.eot?#iefix") format("embedded-opentype"), url("../fonts/Gilroy-Semibold/Gilroy-Semibold.woff2") format("woff2"), url("../fonts/Gilroy-Semibold/Gilroy-Semibold.woff") format("woff"), url("../fonts/Gilroy-Semibold/Gilroy-Semibold.ttf") format("truetype"), url("../fonts/Gilroy-Semibold/Gilroy-Semibold.svg#../fonts/Gilroy-Semibold") format("svg");
-            font-weight: 600;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        [class*=_contenier] {
-            max-width: 1125px;
-            padding: 0 15px;
-            margin: 0 auto;
-        }
-
-        .wrapper {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            min-width: 100%;
-        }
-
-        .wrapper .header {
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 20;
-        }
-
-        .wrapper .header .header__contenier {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 130px;
-        }
-
-        .wrapper .header .header__contenier .header__logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-family: "Gilroy", sans-serif;
-            font-size: 24px;
-        }
-
-        .wrapper .header .header__contenier .header__logo .header__logo--img {
-            max-width: 100%;
-        }
-
-        .wrapper .header .header__contenier .header__logo .header__logo--text {
-            margin: 0 0 0 15px;
-            color: #ff8c00;
-            white-space: nowrap;
-        }
-
-        .wrapper .header .header__contenier .menu .menu__list {
-            display: flex;
-            align-items: center;
-        }
-
-        .wrapper .header .header__contenier .menu .menu__list .menu__link {
-            font-size: 20px;
-            color: #3a2a1d;
-            font-weight: 500;
-        }
-
-        .wrapper .header .header__contenier .menu .menu__list .menu__link:not(:last-child) {
-            margin-right: calc(18px + 6 * (100vw - 320px) / 1125);
-        }
-
-        .wrapper .header .header__contenier .header__btns {
-            display: flex;
-            align-items: center;
-            font-size: calc(18px + 2 * (100vw - 320px) / 1125);
-        }
-
-        .wrapper .header .header__contenier .header__btns .header__btn {
-            color: #ff8c00;
-            font-weight: bold;
-        }
-
-        .wrapper .header .header__contenier .header__btns .header__btn:not(:last-child) {
-            margin-right: calc(6px + 6 * (100vw - 320px) / 1125);
-        }
-
-        .wrapper .header .header__contenier .header__btns .orange {
-            padding: 10px 28px;
-            background-color: #ff8c00;
-            border-radius: 30px;
-            color: #fff;
-            font-weight: bold;
-        }
-
-        .wrapper .main {
-            flex: 1 1 auto;
-        }
-
-        .wrapper .main .problem {
-            padding: 128px 0 70px 0;
-        }
-
-        .wrapper .main .problem .problem__contenier {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .wrapper .main .problem .problem__contenier .left .left__problem {
-            display: flex;
-            text-align: center;
-            flex-direction: column;
-            align-items: center;
-            background-color: #ffeadc;
-            border-radius: 30px;
-            max-width: 480px;
-            padding: 10px 25px 66px 25px;
-            line-height: 22px;
-            box-shadow: 0px 4px 10px 4px rgba(34, 60, 80, 0.2);
-        }
-
-        .wrapper .main .problem .problem__contenier .left .left__problem .left__problem--title {
-            font-weight: bold;
-            font-size: 24px;
-            color: #ff8c00;
-            margin-bottom: 26px;
-        }
-
-        .wrapper .main .problem .problem__contenier .left .left__problem .left__problem--text {
-            font-size: 18px;
-            font-weight: 500;
-            font-family: "Gilroy" sans-serif;
-            text-align: left;
-            letter-spacing: 4%;
-        }
-
-        .wrapper .main .problem .problem__contenier .left .left__problem:not(:last-child) {
-            margin-bottom: 40px;
-        }
-
-        .wrapper .main .problem .problem__contenier .left .left__solution {
-            display: flex;
-            text-align: center;
-            flex-direction: column;
-            align-items: center;
-            background-color: #ffeadc;
-            border-radius: 30px;
-            max-width: 480px;
-            padding: 10px 25px 66px 25px;
-            line-height: 22px;
-            box-shadow: 0px 4px 10px 4px rgba(34, 60, 80, 0.2);
-        }
-
-        .wrapper .main .problem .problem__contenier .left .left__solution .left__solution--title {
-            font-weight: bold;
-            font-size: 24px;
-            color: #ff8c00;
-            margin-bottom: 26px;
-        }
-
-        .wrapper .main .problem .problem__contenier .left .left__solution .left__solution--text {
-            font-size: 18px;
-            font-weight: 500;
-            font-family: "Gilroy" sans-serif;
-            text-align: left;
-            letter-spacing: 4%;
-        }
-
-        .wrapper .main .problem .problem__contenier .right {
-            width: 480px;
-            background-color: #ffeadc;
-            border-radius: 30px;
-            height: 630px;
-            box-shadow: 0px 4px 10px 4px rgba(34, 60, 80, 0.2);
-        }
-
-        .wrapper .main .team {
-            padding: 126px 0 140px 0;
-            background-color: #fff4eb;
-        }
-
-        .wrapper .main .team .team__contenier .title {
-            font-weight: 500;
-            font-size: 48px;
-            text-align: center;
-            margin-bottom: 34px;
-        }
-
-        /* Убраны старые правила top (будут переопределены ниже) */
-        .wrapper .main .team .team__contenier .top {
-            display: block;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* оригинальные правила для карточек (адаптируем для слайдов) */
-        .wrapper .main .team .team__contenier .top .top__blocks {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
-
-        .wrapper .main .team .team__contenier .top .top__blocks .top_img {
-            width: 100%;
-            height: auto;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .wrapper .main .team .team__contenier .top .top__blocks .top_img img {
-            max-width: 100%;
-            border-radius: 30px;
-            position: relative;
-            object-fit: cover;
-        }
-
-        .wrapper .main .team .team__contenier .top .top__blocks .top__info {
-            z-index: 1;
-            position: relative;
-            align-items: center;
-            flex-direction: column;
-            width: 100%;
-            text-align: center;
-            justify-content: center;
-            background-color: rgba(217, 217, 217, 0.0);
-            border-radius: 10px;
-            margin-top: 12px;
-        }
-
-        .wrapper .main .team .team__contenier .top .top__blocks .top__info .top__name {
-            color: #ff8c00;
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        .wrapper .main .team .team__contenier .top .top__blocks .top__info .top__role {
-            margin-bottom: 5px;
-        }
-
-        .wrapper .main .reason {
-            padding: 128px 0 140px 0;
-        }
-
-        .wrapper .main .reason .reason__contenier .reason__title {
-            text-align: center;
-            font-weight: 500;
-            font-size: 48px;
-            text-align: center;
-            margin-bottom: 34px;
-        }
-
-        .wrapper .main .reason .reason__contenier .reason_items {
-            display: flex;
-            justify-content: space-between;
-            flex: 0 0 auto;
-        }
-
-        .wrapper .main .reason .reason__contenier .reason_items .left {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            background-color: #ffeadc;
-            border-radius: 30px;
-            padding: 36px 25px 108px 25px;
-            flex: 0 0 45%;
-        }
-
-        .wrapper .main .reason .reason__contenier .reason_items .left .left__title {
-            text-align: center;
-            font-weight: bold;
-            font-size: 32px;
-            margin-bottom: 37px;
-            color: #ff8c00;
-        }
-
-        .wrapper .main .reason .reason__contenier .reason_items .left .left__text {
-            font-size: 18px;
-            font-family: "Gilroy", sans-serif;
-            font-weight: 500;
-            letter-spacing: 4%;
-            line-height: 30px;
-        }
-
-        .wrapper .main .reason .reason__contenier .reason_items .right .right__img {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .wrapper .main .reason .reason__contenier .reason_items .right .right__img img {
-            max-width: 100%;
-            object-fit: cover;
-        }
-
-        .wrapper .main .roadmap {
-            padding: 128px 0 140px 0;
-            background-color: #fff4eb;
-        }
-
-        .wrapper .main .roadmap .roadmap__contenier .raodmap_titie {
-            font-weight: 500;
-            font-size: 48px;
-            text-align: center;
-            margin-bottom: 34px;
-        }
-
-        .wrapper .main .roadmap .roadmap__contenier .roadmap__blocks {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block {
-            width: 336px;
-            padding: 47px 30px 46px 30px;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            margin: 0 auto;
-            background-color: #fafafa;
-            border-radius: 20px;
-        }
-
-        .wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block__title {
-            font-weight: 400;
-            font-size: 20px;
-            padding: 9px 24px;
-            border-radius: 60px;
-            background-color: rgba(255, 167, 44, 0.2039215686);
-            color: #8a5e00;
-            margin: 37px 0;
-        }
-
-        .wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .one {
-            background-color: rgba(100, 199, 93, 0.2274509804);
-            color: #64c75d;
-        }
-
-        .wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .two {
-            background-color: rgba(255, 167, 44, 0.3843137255);
-            color: #8a5e00;
-        }
-
-        .wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block__subtitle {
-            margin-bottom: 10px;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block_texts .text {
-            font-size: 16px;
-            font-weight: 500;
-            text-align: center;
-        }
-
-        .wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block_texts .text:not(:last-child) {
-            margin-bottom: 10px;
-        }
-
-        .wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block_texts .text::marker {
-            position: relative;
-            left: -40px;
-        }
-
-        .wrapper .footer {
-            margin-top: auto;
-        }
-
-        /* ====== ДОБАВЛЕННЫЕ СТИЛИ ДЛЯ SWIPER / КАРУСЕЛИ ====== */
-
-        /* Контейнер карусели */
-        .team-swiper {
-            width: 100%;
-            padding: 20px 0 40px 0;
-            box-sizing: border-box;
-        }
-
-        /* Базовые слайды */
-        .team-swiper .swiper-slide {
-            width: 280px;
-            /* базовая ширина */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.6s cubic-bezier(.2, .8, .2, 1), opacity 0.6s;
-            will-change: transform, opacity;
-            pointer-events: auto;
-        }
-
-        /* Оформление карточки внутри слайда */
-        .team-swiper .top__blocks {
-            margin: 0;
-            padding: 16px;
-            width: 100%;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-            overflow: hidden;
-            text-align: center;
-        }
-
-        /* Изображение карточки */
-        .team-swiper .top__blocks .top_img {
-            width: 100%;
-            height: 320px;
-            overflow: hidden;
-            border-radius: 18px;
-            position: relative;
-        }
-
-        .team-swiper .top__blocks .top_img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Текстовая информация */
-        .team-swiper .top__info {
-            margin-top: 14px;
-        }
-
-        .team-swiper .top__name {
-            color: #ff8c00;
-            font-weight: 700;
-            font-size: 18px;
-            margin-bottom: 6px;
-        }
-
-        .team-swiper .top__role {
-            color: #3a2a1d;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        /* Плавное увеличивание активного слайда (и подъём) */
-        .team-swiper .swiper-slide-active {
-            transform: translateY(-10px) scale(1.08);
-            z-index: 50;
-        }
-
-        /* Немного уменьшенные соседние слайды */
-        .team-swiper .swiper-slide-prev,
-        .team-swiper .swiper-slide-next {
-            transform: translateY(0) scale(0.95);
-            z-index: 30;
-            opacity: 0.95;
-        }
-
-        /* Дальние слайды — тоньше */
-        .team-swiper .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-prev):not(.swiper-slide-next) {
-            transform: scale(0.86);
-            opacity: 0.7;
-            z-index: 10;
-        }
-
-        /* Мобильные */
-        @media (max-width: 768px) {
-            .team-swiper .swiper-slide {
-                width: 80%;
-            }
-
-            .team-swiper .swiper-slide:not(.swiper-slide-active) {
-                opacity: 0.6;
-            }
-        }
-
-        /* Стили навигации/пагинации */
-        .swiper-button-next,
-        .swiper-button-prev {
-            color: #ff8c00;
-            width: 36px;
-            height: 36px;
-            top: 45%;
-            opacity: 0.95;
-        }
-
-        .swiper-pagination-bullet {
-            background: rgba(0, 0, 0, 0.15);
-            opacity: 0.9;
-        }
-
-        .swiper-pagination-bullet-active {
-            background: #ff8c00;
-        }
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+*, *::before, *::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+html, body {
+  height: 100%;
+  line-height: 1;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  background-color: #fff;
+  color: #3a2a1d;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-Regular/Gilroy-Regular.eot");
+  src: url("../fonts/Gilroy-Regular/Gilroy-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Gilroy-Regular/Gilroy-Regular.woff2") format("woff2"), url("../fonts/Gilroy-Regular/Gilroy-Regular.woff") format("woff"), url("../fonts/Gilroy-Regular/Gilroy-Regular.ttf") format("truetype"), url("../fonts/Gilroy-Regular/Gilroy-Regular.svg#../fonts/Gilroy-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-Bold/Gilroy-Bold.eot");
+  src: url("../fonts/Gilroy-Bold/Gilroy-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Gilroy-Bold/Gilroy-Bold.woff2") format("woff2"), url("../fonts/Gilroy-Bold/Gilroy-Bold.woff") format("woff"), url("../fonts/Gilroy-Bold/Gilroy-Bold.ttf") format("truetype"), url("../fonts/Gilroy-Bold/Gilroy-Bold.svg#../fonts/Gilroy-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-Medium/Gilroy-Medium.eot");
+  src: url("../fonts/Gilroy-Medium/Gilroy-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/Gilroy-Medium/Gilroy-Medium.woff2") format("woff2"), url("../fonts/Gilroy-Medium/Gilroy-Medium.woff") format("woff"), url("../fonts/Gilroy-Medium/Gilroy-Medium.ttf") format("truetype"), url("../fonts/Gilroy-Medium/Gilroy-Medium.svg#../fonts/Gilroy-Medium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url("../fonts/Gilroy-Semibold/Gilroy-Semibold.eot");
+  src: url("../fonts/Gilroy-Semibold/Gilroy-Semibold.eot?#iefix") format("embedded-opentype"), url("../fonts/Gilroy-Semibold/Gilroy-Semibold.woff2") format("woff2"), url("../fonts/Gilroy-Semibold/Gilroy-Semibold.woff") format("woff"), url("../fonts/Gilroy-Semibold/Gilroy-Semibold.ttf") format("truetype"), url("../fonts/Gilroy-Semibold/Gilroy-Semibold.svg#../fonts/Gilroy-Semibold") format("svg");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+[class*=_contenier] {
+  max-width: 1125px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+}
+.wrapper .header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+.wrapper .header .header__contenier {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 130px;
+}
+.wrapper .header .header__contenier .header__logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-family: "Gilroy", sans-serif;
+  font-size: 24px;
+}
+.wrapper .header .header__contenier .header__logo .header__logo--img {
+  max-width: 100%;
+}
+.wrapper .header .header__contenier .header__logo .header__logo--text {
+  margin: 0 0 0 15px;
+  color: #ff8c00;
+  white-space: nowrap;
+}
+.wrapper .header .header__contenier .menu .menu__list {
+  display: flex;
+  align-items: center;
+}
+.wrapper .header .header__contenier .menu .menu__list .menu__link {
+  font-size: 20px;
+  color: #3a2a1d;
+  font-weight: 500;
+}
+.wrapper .header .header__contenier .menu .menu__list .menu__link:not(:last-child) {
+  margin-right: calc(18px + 6 * (100vw - 320px) / 1125);
+}
+.wrapper .header .header__contenier .header__btns {
+  display: flex;
+  align-items: center;
+  font-size: calc(18px + 2 * (100vw - 320px) / 1125);
+}
+.wrapper .header .header__contenier .header__btns .header__btn {
+  color: #ff8c00;
+  font-weight: bold;
+}
+.wrapper .header .header__contenier .header__btns .header__btn:not(:last-child) {
+  margin-right: calc(6px + 6 * (100vw - 320px) / 1125);
+}
+.wrapper .header .header__contenier .header__btns .orange {
+  padding: 10px 28px;
+  background-color: #ff8c00;
+  border-radius: 30px;
+  color: #fff;
+  font-weight: bold;
+}
+.wrapper .main {
+  flex: 1 1 auto;
+}
+.wrapper .main .problem {
+  padding: 128px 0 70px 0;
+}
+.wrapper .main .problem .problem__contenier {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper .main .problem .problem__contenier .left .left__problem {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffeadc;
+  border-radius: 30px;
+  max-width: 480px;
+  padding: 10px 25px 66px 25px;
+  line-height: 22px;
+  box-shadow: 0px 4px 10px 4px rgba(34, 60, 80, 0.2);
+}
+.wrapper .main .problem .problem__contenier .left .left__problem .left__problem--title {
+  font-weight: bold;
+  font-size: 24px;
+  color: #ff8c00;
+  margin-bottom: 26px;
+}
+.wrapper .main .problem .problem__contenier .left .left__problem .left__problem--text {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Gilroy" sans-serif;
+  text-align: left;
+  letter-spacing: 4%;
+}
+.wrapper .main .problem .problem__contenier .left .left__problem:not(:last-child) {
+  margin-bottom: 40px;
+}
+.wrapper .main .problem .problem__contenier .left .left__solution {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffeadc;
+  border-radius: 30px;
+  max-width: 480px;
+  padding: 10px 25px 66px 25px;
+  line-height: 22px;
+  box-shadow: 0px 4px 10px 4px rgba(34, 60, 80, 0.2);
+}
+.wrapper .main .problem .problem__contenier .left .left__solution .left__solution--title {
+  font-weight: bold;
+  font-size: 24px;
+  color: #ff8c00;
+  margin-bottom: 26px;
+}
+.wrapper .main .problem .problem__contenier .left .left__solution .left__solution--text {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Gilroy" sans-serif;
+  text-align: left;
+  letter-spacing: 4%;
+}
+.wrapper .main .problem .problem__contenier .right {
+  width: 480px;
+  background-color: #ffeadc;
+  border-radius: 30px;
+  height: 630px;
+  box-shadow: 0px 4px 10px 4px rgba(34, 60, 80, 0.2);
+}
+.wrapper .main .team {
+  padding: 126px 0 140px 0;
+  background-color: #fff4eb;
+}
+.wrapper .main .team .team__contenier .title {
+  font-weight: 500;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 34px;
+}
+/* Убраны старые правила top (будут переопределены ниже) */
+.wrapper .main .team .team__contenier .top {
+  display: block;
+  align-items: center;
+  justify-content: center;
+}
+
+/* оригинальные правила для карточек (адаптируем для слайдов) */
+.wrapper .main .team .team__contenier .top .top__blocks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.wrapper .main .team .team__contenier .top .top__blocks .top_img {
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+}
+.wrapper .main .team .team__contenier .top .top__blocks .top_img img {
+  max-width: 100%;
+  border-radius: 30px;
+  position: relative;
+  object-fit: cover;
+}
+.wrapper .main .team .team__contenier .top .top__blocks .top__info {
+  z-index: 1;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  background-color: rgba(217, 217, 217, 0.0);
+  border-radius: 10px;
+  margin-top: 12px;
+}
+.wrapper .main .team .team__contenier .top .top__blocks .top__info .top__name {
+  color: #ff8c00;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.wrapper .main .team .team__contenier .top .top__blocks .top__info .top__role {
+  margin-bottom: 5px;
+}
+.wrapper .main .reason {
+  padding: 128px 0 140px 0;
+}
+.wrapper .main .reason .reason__contenier .reason__title {
+  text-align: center;
+  font-weight: 500;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 34px;
+}
+.wrapper .main .reason .reason__contenier .reason_items {
+  display: flex;
+  justify-content: space-between;
+  flex: 0 0 auto;
+}
+.wrapper .main .reason .reason__contenier .reason_items .left {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #ffeadc;
+  border-radius: 30px;
+  padding: 36px 25px 108px 25px;
+  flex: 0 0 45%;
+}
+.wrapper .main .reason .reason__contenier .reason_items .left .left__title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 32px;
+  margin-bottom: 37px;
+  color: #ff8c00;
+}
+.wrapper .main .reason .reason__contenier .reason_items .left .left__text {
+  font-size: 18px;
+  font-family: "Gilroy", sans-serif;
+  font-weight: 500;
+  letter-spacing: 4%;
+  line-height: 30px;
+}
+.wrapper .main .reason .reason__contenier .reason_items .right .right__img {
+  position: relative;
+  overflow: hidden;
+}
+.wrapper .main .reason .reason__contenier .reason_items .right .right__img img {
+  max-width: 100%;
+  object-fit: cover;
+}
+.wrapper .main .roadmap {
+  padding: 128px 0 140px 0;
+  background-color: #fff4eb;
+}
+.wrapper .main .roadmap .roadmap__contenier .raodmap_titie {
+  font-weight: 500;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 34px;
+}
+.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks {
+  display: flex;
+  justify-content: space-between;
+}
+.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block {
+  width: 336px;
+  padding: 47px 30px 46px 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: #fafafa;
+  border-radius: 20px;
+}
+.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block__title {
+  font-weight: 400;
+  font-size: 20px;
+  padding: 9px 24px;
+  border-radius: 60px;
+  background-color: rgba(255, 167, 44, 0.2039215686);
+  color: #8a5e00;
+  margin: 37px 0;
+}
+.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .one {
+  background-color: rgba(100, 199, 93, 0.2274509804);
+  color: #64c75d;
+}
+.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .two {
+  background-color: rgba(255, 167, 44, 0.3843137255);
+  color: #8a5e00;
+}
+.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block__subtitle {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block_texts .text {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block_texts .text:not(:last-child) {
+  margin-bottom: 10px;
+}
+.wrapper .main .roadmap .roadmap__contenier .roadmap__blocks .block .block_texts .text::marker {
+  position: relative;
+  left: -40px;
+}
+.wrapper .footer {
+  margin-top: auto;
+}
+
+/* ====== ДОБАВЛЕННЫЕ СТИЛИ ДЛЯ SWIPER / КАРУСЕЛИ ====== */
+
+/* Контейнер карусели */
+.team-swiper {
+  width: 100%;
+  padding: 20px 0 40px 0;
+  box-sizing: border-box;
+}
+
+/* Базовые слайды */
+.team-swiper .swiper-slide {
+  width: 280px; /* базовая ширина */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.6s cubic-bezier(.2,.8,.2,1), opacity 0.6s;
+  will-change: transform, opacity;
+  pointer-events: auto;
+}
+
+/* Оформление карточки внутри слайда */
+.team-swiper .top__blocks {
+  margin: 0;
+  padding: 16px;
+  width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Изображение карточки */
+.team-swiper .top__blocks .top_img {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  border-radius: 18px;
+  position: relative;
+}
+.team-swiper .top__blocks .top_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Текстовая информация */
+.team-swiper .top__info {
+  margin-top: 14px;
+}
+.team-swiper .top__name {
+  color: #ff8c00;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+.team-swiper .top__role {
+  color: #3a2a1d;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Плавное увеличивание активного слайда (и подъём) */
+.team-swiper .swiper-slide-active {
+  transform: translateY(-10px) scale(1.08);
+  z-index: 50;
+}
+
+/* Немного уменьшенные соседние слайды */
+.team-swiper .swiper-slide-prev,
+.team-swiper .swiper-slide-next {
+  transform: translateY(0) scale(0.95);
+  z-index: 30;
+  opacity: 0.95;
+}
+
+/* Дальние слайды — тоньше */
+.team-swiper .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-prev):not(.swiper-slide-next) {
+  transform: scale(0.86);
+  opacity: 0.7;
+  z-index: 10;
+}
+
+/* Мобильные */
+@media (max-width: 768px) {
+  .team-swiper .swiper-slide {
+    width: 80%;
+  }
+  .team-swiper .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.6;
+  }
+}
+
+/* Стили навигации/пагинации */
+.swiper-button-next, .swiper-button-prev {
+  color: #ff8c00;
+  width: 36px;
+  height: 36px;
+  top: 45%;
+  opacity: 0.95;
+}
+.swiper-pagination-bullet {
+  background: rgba(0,0,0,0.15);
+  opacity: 0.9;
+}
+.swiper-pagination-bullet-active {
+  background: #ff8c00;
+}
     </style>
 </head>
-
 <body>
     <div class="wrapper">
         <div class="header">
@@ -593,19 +519,14 @@
                     <div class="problem__left left">
                         <div class="left__problem">
                             <div class="left__problem--title">Problem</div>
-                            <div class="left__problem--text">The monotony of accounting processes leads to a loss of
-                                focus, leading to an increase in careless errors. As a result,
-                                routine operations take longer, reducing efficiency and creating unnecessary workload.
-                            </div>
+                            <div class="left__problem--text">The monotony of accounting processes leads to a loss of focus, leading to an increase in careless errors. As a result,
+                            routine operations take longer, reducing efficiency and creating unnecessary workload.</div>
                         </div>
                         <div class="left__solution">
                             <div class="left__solution--title">Solution</div>
-                            <div class="left__solution--text">Our Mandarin AI service helps eliminate monotony by
-                                automating repetitive accounting tasks: data entry, document
-                                reconciliation, report generation, and error checking. It reduces the risk of accidental
-                                inaccuracies, speeds up
-                                workflow, and optimizes employees' time, allowing them to focus on what truly matters.
-                            </div>
+                            <div class="left__solution--text">Our Mandarin AI service helps eliminate monotony by automating repetitive accounting tasks: data entry, document
+                            reconciliation, report generation, and error checking. It reduces the risk of accidental inaccuracies, speeds up
+                            workflow, and optimizes employees' time, allowing them to focus on what truly matters.</div>
                         </div>
                     </div>
                     <div class="problem__right right"></div>
@@ -627,24 +548,21 @@
                                     <div class="top__role">TeamLead</div>
                                     Python, Docker, JS
                                     <div class="top__links" style="margin-top:6px;">
-                                        <a href="https://www.linkedin.com/in/komronbek-urinboev" class="top_link"
-                                            target="_blank">
-                                            <img src="assets/img/linkedin.svg" alt="linkedin" style="width:20px">
-                                        </a>
+                                  <a href="https://www.linkedin.com/in/komronbek-urinboev" class="top_link" target="_blank">
+    <img src="assets/img/linkedin.svg" alt="linkedin" style="width:20px">
+</a>
 
-                                        <a href="https://t.me/Komronbek_Urinboev" class="top_link" target="_blank">
-                                            <img src="assets/img/telegram.svg" alt="telegram" style="width:20px">
-                                        </a>
+<a href="https://t.me/Komronbek_Urinboev" class="top_link" target="_blank">
+    <img src="assets/img/telegram.svg" alt="telegram" style="width:20px">
+</a>
 
-                                        <a href="https://github.com/Komronbek-Urinboev" class="top_link"
-                                            target="_blank">
-                                            <img src="assets/img/github.svg" alt="github" style="width:20px">
-                                        </a>
+<a href="https://github.com/Komronbek-Urinboev" class="top_link" target="_blank">
+    <img src="assets/img/github.svg" alt="github" style="width:20px">
+</a>
 
-                                        <a href="https://www.instagram.com/_khan_komron_/" class="top_link"
-                                            target="_blank">
-                                            <img src="assets/img/instagram.svg" alt="instagram" style="width:20px">
-                                        </a>
+<a href="https://www.instagram.com/_khan_komron_/" class="top_link" target="_blank">
+    <img src="assets/img/instagram.svg" alt="instagram" style="width:20px">
+</a>
                                     </div>
                                 </div>
                             </div>
@@ -657,22 +575,21 @@
                                     <div class="top__role">Front-end Developer</div>
                                     HTML, CSS, JS
                                     <div class="top__links" style="margin-top:6px;">
-                                        <!--                                      <a href="https://linkedin.com/in/USERNAME" class="top_link" target="_blank">-->
-                                        <!--    <img src="assets/img/linkedin.svg" alt="linkedin" style="width:20px">-->
-                                        <!--</a>-->
+<!--                                      <a href="https://linkedin.com/in/USERNAME" class="top_link" target="_blank">-->
+<!--    <img src="assets/img/linkedin.svg" alt="linkedin" style="width:20px">-->
+<!--</a>-->
 
-                                        <a href="https://t.me/LenovoFlex14" class="top_link" target="_blank">
-                                            <img src="assets/img/telegram.svg" alt="telegram" style="width:20px">
-                                        </a>
+<a href="https://t.me/LenovoFlex14" class="top_link" target="_blank">
+    <img src="assets/img/telegram.svg" alt="telegram" style="width:20px">
+</a>
 
-                                        <a href="https://github.com/MakakaBomba" class="top_link" target="_blank">
-                                            <img src="assets/img/github.svg" alt="github" style="width:20px">
-                                        </a>
+<a href="https://github.com/MakakaBomba" class="top_link" target="_blank">
+    <img src="assets/img/github.svg" alt="github" style="width:20px">
+</a>
 
-                                        <a href="https://www.instagram.com/iht_botlab?igsh=MXJidjU1YmRja25x"
-                                            class="top_link" target="_blank">
-                                            <img src="assets/img/instagram.svg" alt="instagram" style="width:20px">
-                                        </a>
+<a href="https://www.instagram.com/iht_botlab?igsh=MXJidjU1YmRja25x" class="top_link" target="_blank">
+    <img src="assets/img/instagram.svg" alt="instagram" style="width:20px">
+</a>
                                     </div>
                                 </div>
                             </div>
@@ -685,27 +602,26 @@
                                     <div class="top__role">AI Developer</div>
                                     Python, Django
                                     <div class="top__links" style="margin-top:6px;">
-                                        <!--                                        <a href="https://linkedin.com/in/USERNAME" class="top_link" target="_blank">-->
-                                        <!--    <img src="assets/img/linkedin.svg" alt="linkedin" style="width:20px">-->
-                                        <!--</a>-->
+<!--                                        <a href="https://linkedin.com/in/USERNAME" class="top_link" target="_blank">-->
+<!--    <img src="assets/img/linkedin.svg" alt="linkedin" style="width:20px">-->
+<!--</a>-->
 
-                                        <a href="https://t.me/Richgoldie2009" class="top_link" target="_blank">
-                                            <img src="assets/img/telegram.svg" alt="telegram" style="width:20px">
-                                        </a>
+<a href="https://t.me/Richgoldie2009" class="top_link" target="_blank">
+    <img src="assets/img/telegram.svg" alt="telegram" style="width:20px">
+</a>
 
-                                        <!--<a href="https://github.com/USERNAME" class="top_link" target="_blank">-->
-                                        <!--    <img src="assets/img/github.svg" alt="github" style="width:20px">-->
-                                        <!--</a>-->
+<!--<a href="https://github.com/USERNAME" class="top_link" target="_blank">-->
+<!--    <img src="assets/img/github.svg" alt="github" style="width:20px">-->
+<!--</a>-->
 
-                                        <a href="https://www.instagram.com/richgoldie_/?igsh=MXE4dWNucjVwcGc3YQ%3D%3D"
-                                            class="top_link" target="_blank">
-                                            <img src="assets/img/instagram.svg" alt="instagram" style="width:20px">
-                                        </a>
+<a href="https://www.instagram.com/richgoldie_/?igsh=MXE4dWNucjVwcGc3YQ%3D%3D" class="top_link" target="_blank">
+    <img src="assets/img/instagram.svg" alt="instagram" style="width:20px">
+</a>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- slide 4 -->
+                          <!-- slide 4 -->
                             <div class="swiper-slide top__blocks">
                                 <div class="top_img"><img src="assets/img/main/komiljon1.jpg" alt="komiljon"></div>
                                 <div class="top__info">
@@ -713,21 +629,21 @@
                                     <div class="top__role">Slide Designer</div>
                                     PowerPoint, Google Slides, Canva
                                     <div class="top__links" style="margin-top:6px;">
-                                        <!--<a href="https://linkedin.com/in/USERNAME" class="top_link" target="_blank">-->
-                                        <!--    <img src="assets/img/linkedin.svg" alt="linkedin" style="width:20px">-->
-                                        <!--</a>-->
+<!--<a href="https://linkedin.com/in/USERNAME" class="top_link" target="_blank">-->
+<!--    <img src="assets/img/linkedin.svg" alt="linkedin" style="width:20px">-->
+<!--</a>-->
 
-                                        <a href="https://t.me/Komilzhonn" class="top_link" target="_blank">
-                                            <img src="assets/img/telegram.svg" alt="telegram" style="width:20px">
-                                        </a>
+<a href="https://t.me/Komilzhonn" class="top_link" target="_blank">
+    <img src="assets/img/telegram.svg" alt="telegram" style="width:20px">
+</a>
 
-                                        <!--<a href="https://github.com/USERNAME" class="top_link" target="_blank">-->
-                                        <!--    <img src="assets/img/github.svg" alt="github" style="width:20px">-->
-                                        <!--</a>-->
+<!--<a href="https://github.com/USERNAME" class="top_link" target="_blank">-->
+<!--    <img src="assets/img/github.svg" alt="github" style="width:20px">-->
+<!--</a>-->
 
-                                        <!--<a href="https://instagram.com/USERNAME" class="top_link" target="_blank">-->
-                                        <!--    <img src="assets/img/instagram.svg" alt="instagram" style="width:20px">-->
-                                        <!--</a>-->
+<!--<a href="https://instagram.com/USERNAME" class="top_link" target="_blank">-->
+<!--    <img src="assets/img/instagram.svg" alt="instagram" style="width:20px">-->
+<!--</a>-->
 
                                     </div>
                                 </div>
@@ -743,18 +659,17 @@
                                     <div class="top__role">Data Scientist</div>
                                     Python, C++, SQL
                                     <div class="top__links" style="margin-top:6px;">
-                                        <a href="https://t.me/assets_1153" class="top_link" target="_blank">
-                                            <img src="assets/img/telegram.svg" alt="telegram" style="width:20px">
-                                        </a>
+<a href="https://t.me/assets_1153" class="top_link" target="_blank">
+    <img src="assets/img/telegram.svg" alt="telegram" style="width:20px">
+</a>
 
-                                        <!--<a href="https://github.com/USERNAME" class="top_link" target="_blank">-->
-                                        <!--    <img src="assets/img/github.svg" alt="github" style="width:20px">-->
-                                        <!--</a>-->
+<!--<a href="https://github.com/USERNAME" class="top_link" target="_blank">-->
+<!--    <img src="assets/img/github.svg" alt="github" style="width:20px">-->
+<!--</a>-->
 
-                                        <a href="https://www.instagram.com/tgm_standoff?igsh=MXVuNG93bDE1dWMxeg=="
-                                            class="top_link" target="_blank">
-                                            <img src="assets/img/instagram.svg" alt="instagram" style="width:20px">
-                                        </a>
+<a href="https://www.instagram.com/tgm_standoff?igsh=MXVuNG93bDE1dWMxeg==" class="top_link" target="_blank">
+    <img src="assets/img/instagram.svg" alt="instagram" style="width:20px">
+</a>
 
                                     </div>
                                 </div>
@@ -777,16 +692,11 @@
                     <div class="reason_items">
                         <div class="reason__left left">
                             <div class="left__title">Reason for Choosing Us</div>
-                            <div class="left__text">We all have friends or family members who work as accountants, and
-                                they all told us almost identical stories. When we
-                                visited their offices, we'd see them spending hours creating spreadsheets, reports, and
-                                performing seemingly simple, yet
-                                incredibly tedious tasks. A few hours would pass, and we'd return, with the scene
-                                remaining virtually unchanged.
-                                It was this observation that spurred our team to do everything possible to solve this
-                                problem. Our motivation became
-                                boundless: eliminate routine, give accountants back their time, and allow them to work
-                                more easily and efficiently.</div>
+                            <div class="left__text">We all have friends or family members who work as accountants, and they all told us almost identical stories. When we
+                            visited their offices, we'd see them spending hours creating spreadsheets, reports, and performing seemingly simple, yet
+                            incredibly tedious tasks. A few hours would pass, and we'd return, with the scene remaining virtually unchanged.
+                            It was this observation that spurred our team to do everything possible to solve this problem. Our motivation became
+                            boundless: eliminate routine, give accountants back their time, and allow them to work more easily and efficiently.</div>
                         </div>
                         <div class="reason__right right">
                             <div class="right__img"><img src="assets/img/main/all-team.jpg" alt=""></div>
@@ -795,197 +705,179 @@
                 </div>
             </section>
 
-            <section class="roadmap">
-                <style>
-                    /* --- Стили для RoadMap (встроены для удобства) --- */
+<section class="roadmap">
+    <style>
+        /* --- Стили для RoadMap (встроены для удобства) --- */
 
-                    .roadmap {
-                        padding: 128px 0 140px 0;
-                        background-color: #fff4eb;
-                        font-family: "Montserrat", sans-serif;
-                        /* На всякий случай дублирую шрифт */
-                    }
+        .roadmap {
+            padding: 128px 0 140px 0;
+            background-color: #fff4eb;
+            font-family: "Montserrat", sans-serif; /* На всякий случай дублирую шрифт */
+        }
 
-                    .roadmap__contenier {
-                        max-width: 1125px;
-                        padding: 0 15px;
-                        margin: 0 auto;
-                    }
+        .roadmap__contenier {
+            max-width: 1125px;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
 
-                    .raodmap_titie {
-                        font-weight: 500;
-                        font-size: 48px;
-                        text-align: center;
-                        margin-bottom: 50px;
-                        /* Чуть увеличил отступ для воздуха */
-                        color: #3a2a1d;
-                    }
+        .raodmap_titie {
+            font-weight: 500;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 50px; /* Чуть увеличил отступ для воздуха */
+            color: #3a2a1d;
+        }
 
-                    /* Контейнер для блоков */
-                    .roadmap__blocks {
-                        display: flex;
-                        justify-content: center;
-                        /* Центрируем, если блоков мало */
-                        gap: 30px;
-                        /* Отступ между блоками вместо margin внутри */
-                        flex-wrap: wrap;
-                        /* Чтобы на мобилках переносилось */
-                    }
+        /* Контейнер для блоков */
+        .roadmap__blocks {
+            display: flex;
+            justify-content: center; /* Центрируем, если блоков мало */
+            gap: 30px; /* Отступ между блоками вместо margin внутри */
+            flex-wrap: wrap; /* Чтобы на мобилках переносилось */
+        }
 
-                    /* --- СТИЛИ БЛОКА (Карточки) --- */
-                    .block {
-                        flex: 1;
-                        /* Растягиваем блоки равномерно */
-                        min-width: 300px;
-                        max-width: 360px;
-                        padding: 40px 30px;
-                        display: flex;
-                        align-items: center;
-                        flex-direction: column;
-                        background-color: #fafafa;
-                        border-radius: 24px;
-                        /* Чуть более скругленные углы */
+        /* --- СТИЛИ БЛОКА (Карточки) --- */
+        .block {
+            flex: 1; /* Растягиваем блоки равномерно */
+            min-width: 300px;
+            max-width: 360px;
+            padding: 40px 30px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: #fafafa;
+            border-radius: 24px; /* Чуть более скругленные углы */
 
-                        /* Магия плавной анимации */
-                        transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-                        position: relative;
-                        z-index: 1;
-                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-                        /* Легкая тень в покое */
-                        border: 1px solid transparent;
-                        /* Резерв для границы */
-                        cursor: default;
-                    }
+            /* Магия плавной анимации */
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Легкая тень в покое */
+            border: 1px solid transparent; /* Резерв для границы */
+            cursor: default;
+        }
 
-                    /* Элементы внутри блока */
-                    .roadmap__img img {
-                        width: 80px;
-                        /* Фикс размера иконки */
-                        height: 80px;
-                        object-fit: contain;
-                        margin-bottom: 10px;
-                    }
+        /* Элементы внутри блока */
+        .roadmap__img img {
+            width: 80px; /* Фикс размера иконки */
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
 
-                    .block__title {
-                        font-weight: 600;
-                        font-size: 18px;
-                        padding: 8px 20px;
-                        border-radius: 50px;
-                        background-color: rgba(255, 167, 44, 0.2);
-                        color: #8a5e00;
-                        margin: 20px 0;
-                        display: inline-block;
-                    }
+        .block__title {
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            background-color: rgba(255, 167, 44, 0.2);
+            color: #8a5e00;
+            margin: 20px 0;
+            display: inline-block;
+        }
 
-                    /* Цветовые модификаторы для бейджиков */
-                    .block__title.one {
-                        background-color: rgba(100, 199, 93, 0.2);
-                        color: #4da347;
-                    }
+        /* Цветовые модификаторы для бейджиков */
+        .block__title.one {
+            background-color: rgba(100, 199, 93, 0.2);
+            color: #4da347;
+        }
+        .block__title.two {
+            background-color: rgba(255, 167, 44, 0.2);
+            color: #b57b00;
+        }
 
-                    .block__title.two {
-                        background-color: rgba(255, 167, 44, 0.2);
-                        color: #b57b00;
-                    }
+        .block__subtitle {
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.3;
+            color: #3a2a1d;
+            height: 52px; /* Фиксируем высоту заголовка, чтобы карточки были ровными */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-                    .block__subtitle {
-                        margin-bottom: 20px;
-                        font-size: 20px;
-                        font-weight: 700;
-                        text-align: center;
-                        line-height: 1.3;
-                        color: #3a2a1d;
-                        height: 52px;
-                        /* Фиксируем высоту заголовка, чтобы карточки были ровными */
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
+        .block_texts {
+            list-style: none; /* Убираем стандартные точки */
+            padding: 0;
+            width: 100%;
+        }
 
-                    .block_texts {
-                        list-style: none;
-                        /* Убираем стандартные точки */
-                        padding: 0;
-                        width: 100%;
-                    }
+        .block_texts .text {
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.5;
+            color: #665b53;
+            margin-bottom: 12px;
+            position: relative;
+        }
 
-                    .block_texts .text {
-                        font-size: 16px;
-                        font-weight: 500;
-                        text-align: center;
-                        line-height: 1.5;
-                        color: #665b53;
-                        margin-bottom: 12px;
-                        position: relative;
-                    }
+        /* --- ГЛАВНЫЙ ЭФФЕКТ "ФОКУСА" --- */
 
-                    /* --- ГЛАВНЫЙ ЭФФЕКТ "ФОКУСА" --- */
-
-                    /* 1. Когда мышь заходит в общий контейнер:
+        /* 1. Когда мышь заходит в общий контейнер:
               Все блоки сжимаются, становятся прозрачнее и размываются */
-                    .roadmap__blocks:hover .block {
-                        transform: scale(0.92);
-                        opacity: 0.6;
-                        filter: blur(2px) grayscale(40%);
-                        /* Добавляем блюр и серость */
-                    }
+        .roadmap__blocks:hover .block {
+            transform: scale(0.92);
+            opacity: 0.6;
+            filter: blur(2px) grayscale(40%); /* Добавляем блюр и серость */
+        }
 
-                    /* 2. Когда мышь на конкретном блоке:
+        /* 2. Когда мышь на конкретном блоке:
               Он перебивает правило выше: увеличивается, становится четким и ярким */
-                    .roadmap__blocks .block:hover {
-                        transform: scale(1.08) translateY(-10px);
-                        /* Увеличиваем и чуть поднимаем */
-                        opacity: 1;
-                        filter: blur(0) grayscale(0%);
-                        z-index: 10;
-                        /* Выводим на передний план */
-                        background-color: #fff;
-                        /* Становится чисто белым */
-                        box-shadow: 0 30px 60px rgba(255, 140, 0, 0.15);
-                        /* Оранжевая тень */
-                        border-color: rgba(255, 140, 0, 0.3);
-                        /* Легкая оранжевая обводка */
-                    }
-                </style>
+        .roadmap__blocks .block:hover {
+            transform: scale(1.08) translateY(-10px); /* Увеличиваем и чуть поднимаем */
+            opacity: 1;
+            filter: blur(0) grayscale(0%);
+            z-index: 10; /* Выводим на передний план */
+            background-color: #fff; /* Становится чисто белым */
+            box-shadow: 0 30px 60px rgba(255, 140, 0, 0.15); /* Оранжевая тень */
+            border-color: rgba(255, 140, 0, 0.3); /* Легкая оранжевая обводка */
+        }
 
-                <div class="roadmap__contenier">
-                    <div class="raodmap_titie">Road Map</div>
-                    <div class="roadmap__blocks">
-                        <div class="block">
-                            <div class="roadmap__img"><img src="assets/img/main/1.svg" alt="Stage 1"></div>
-                            <div class="block__title one">Stage 1</div>
-                            <h2 class="block__subtitle">Planning & Prototype Visualization</h2>
-                            <ul class="block_texts">
-                                <li class="text">Define project objectives and core features.</li>
-                                <li class="text">Design the user interface and user experience (UI/UX).</li>
-                                <li class="text">Build a clickable prototype to demonstrate workflow.</li>
-                            </ul>
-                        </div>
+    </style>
 
-                        <div class="block">
-                            <div class="roadmap__img"><img src="assets/img/main/2.svg" alt="Stage 2"></div>
-                            <div class="block__title">Stage 2</div>
-                            <h2 class="block__subtitle">AI Training & Data Processing</h2>
-                            <ul class="block_texts">
-                                <li class="text">Collect and prepare sample financial documents.</li>
-                                <li class="text">Train AI to extract items, prices, and taxes.</li>
-                                <li class="text">Implement NLP pipelines for structured output.</li>
-                            </ul>
-                        </div>
+    <div class="roadmap__contenier">
+        <div class="raodmap_titie">Road Map</div>
+        <div class="roadmap__blocks">
+            <div class="block">
+                <div class="roadmap__img"><img src="assets/img/main/1.svg" alt="Stage 1"></div>
+                <div class="block__title one">Stage 1</div>
+                <h2 class="block__subtitle">Planning & Prototype Visualization</h2>
+                <ul class="block_texts">
+                    <li class="text">Define project objectives and core features.</li>
+                    <li class="text">Design the user interface and user experience (UI/UX).</li>
+                    <li class="text">Build a clickable prototype to demonstrate workflow.</li>
+                </ul>
+            </div>
 
-                        <div class="block">
-                            <div class="roadmap__img"><img src="assets/img/main/3.svg" alt="Stage 3"></div>
-                            <div class="block__title two">Stage 3</div>
-                            <h2 class="block__subtitle">MVP & Product Launch</h2>
-                            <ul class="block_texts">
-                                <li class="text">Integrate AI with backend for end-to-end processing.</li>
-                                <li class="text">Generate structured tables and Excel reports.</li>
-                                <li class="text">Test, optimize, and deploy a functional MVP.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="block">
+                <div class="roadmap__img"><img src="assets/img/main/2.svg" alt="Stage 2"></div>
+                <div class="block__title">Stage 2</div>
+                <h2 class="block__subtitle">AI Training & Data Processing</h2>
+                <ul class="block_texts">
+                    <li class="text">Collect and prepare sample financial documents.</li>
+                    <li class="text">Train AI to extract items, prices, and taxes.</li>
+                    <li class="text">Implement NLP pipelines for structured output.</li>
+                </ul>
+            </div>
+
+            <div class="block">
+                <div class="roadmap__img"><img src="assets/img/main/3.svg" alt="Stage 3"></div>
+                <div class="block__title two">Stage 3</div>
+                <h2 class="block__subtitle">MVP & Product Launch</h2>
+                <ul class="block_texts">
+                    <li class="text">Integrate AI with backend for end-to-end processing.</li>
+                    <li class="text">Generate structured tables and Excel reports.</li>
+                    <li class="text">Test, optimize, and deploy a functional MVP.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
         </main>
     </div>
 
@@ -995,76 +887,75 @@
 
     <!-- Инициализация Swiper + плавные прогресс-преобразования -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            if (typeof Swiper === 'undefined') {
-                console.warn('Swiper not loaded');
-                return;
-            }
+document.addEventListener('DOMContentLoaded', function () {
+  if (typeof Swiper === 'undefined') {
+    console.warn('Swiper not loaded');
+    return;
+  }
 
-            const teamSwiper = new Swiper('.team-swiper', {
-                loop: true,
-                speed: 800,
-                centeredSlides: true,
-                slidesPerView: 3,
-                spaceBetween: 40,
-                grabCursor: true,
-                autoplay: {
-                    delay: 2500,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                },
-                breakpoints: {
-                    0: {
-                        slidesPerView: 1,
-                        spaceBetween: 12
-                    },
-                    640: {
-                        slidesPerView: 2,
-                        spaceBetween: 20
-                    },
-                    992: {
-                        slidesPerView: 3,
-                        spaceBetween: 40
-                    }
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev'
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true
-                },
-                on: {
-                    init() { updateSlidesTransform(this); },
-                    resize() { updateSlidesTransform(this); },
-                    setTranslate() { updateSlidesTransform(this); },
-                    slideChange() { updateSlidesTransform(this); },
-                    progress() { updateSlidesTransform(this); }
-                }
-            });
+  const teamSwiper = new Swiper('.team-swiper', {
+    loop: true,
+    speed: 800,
+    centeredSlides: true,
+    slidesPerView: 3,
+    spaceBetween: 40,
+    grabCursor: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+        spaceBetween: 12
+      },
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      992: {
+        slidesPerView: 3,
+        spaceBetween: 40
+      }
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+    on: {
+      init() { updateSlidesTransform(this); },
+      resize() { updateSlidesTransform(this); },
+      setTranslate() { updateSlidesTransform(this); },
+      slideChange() { updateSlidesTransform(this); },
+      progress() { updateSlidesTransform(this); }
+    }
+  });
 
-            function updateSlidesTransform(swiper) {
-                const maxScale = 1.08;
-                const minScale = 0.86;
-                const translateXFactor = 40;
+  function updateSlidesTransform(swiper) {
+    const maxScale = 1.08;
+    const minScale = 0.86;
+    const translateXFactor = 40;
 
-                for (let i = 0; i < swiper.slides.length; i++) {
-                    const slideEl = swiper.slides[i];
-                    const progress = slideEl.progress;
-                    const p = Math.max(-2, Math.min(2, progress));
-                    const scale = maxScale - (Math.abs(p) * (maxScale - minScale) / 2);
-                    const translateX = p * translateXFactor;
-                    const translateY = -Math.abs(1 - Math.abs(p)) * 10;
-                    const zIndex = Math.round(100 - Math.abs(p) * 50);
-                    slideEl.style.transform = `translate3d(${translateX}px, ${translateY}px, 0px) scale(${scale})`;
-                    slideEl.style.zIndex = zIndex;
-                    const opacity = (Math.abs(p) > 1.5) ? 0.6 : (1 - Math.abs(p) * 0.15);
-                    slideEl.style.opacity = opacity;
-                }
-            }
-        });
+    for (let i = 0; i < swiper.slides.length; i++) {
+      const slideEl = swiper.slides[i];
+      const progress = slideEl.progress;
+      const p = Math.max(-2, Math.min(2, progress));
+      const scale = maxScale - (Math.abs(p) * (maxScale - minScale) / 2);
+      const translateX = p * translateXFactor;
+      const translateY = -Math.abs(1 - Math.abs(p)) * 10;
+      const zIndex = Math.round(100 - Math.abs(p) * 50);
+      slideEl.style.transform = `translate3d(${translateX}px, ${translateY}px, 0px) scale(${scale})`;
+      slideEl.style.zIndex = zIndex;
+      const opacity = (Math.abs(p) > 1.5) ? 0.6 : (1 - Math.abs(p) * 0.15);
+      slideEl.style.opacity = opacity;
+    }
+  }
+});
     </script>
 </body>
-
 </html>
